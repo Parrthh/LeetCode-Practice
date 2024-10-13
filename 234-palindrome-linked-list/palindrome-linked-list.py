@@ -8,7 +8,6 @@ class Solution:
         # Test Case: For empty list or single element
         if not head or not head.next:
             return True
-        
         # We need to find the middle of the linked list, so that we can split
         slow = head
         fast = head
