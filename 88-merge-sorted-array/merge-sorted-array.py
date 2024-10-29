@@ -16,11 +16,9 @@ class Solution:
                 p2 -= 1
             p -= 1
         
-        # if nums1[p1] == 0 and nums2[p2] >= 0:
-        #     nums1[p] = nums2[p2]
-        #     p2 -= 1
-        #     p-=1
-        while p2 >= 0:
+        
+
+        while p2>= 0:
             nums1[p] = nums2[p2]
             p2 -= 1
             p -= 1
