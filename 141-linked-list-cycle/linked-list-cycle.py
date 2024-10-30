@@ -14,4 +14,15 @@ class Solution:
             nodes_seen.add(curr)
             curr = curr.next
         return False
-        
+    
+"""
+Time complexity : O(N)
+As we visit each of the n elements in the list at most once. 
+Adding a node to the hash table costs only O(1) time
+
+Space Complexity: O(n)
+The space depends on the number of elements added to the hash table,
+which contains at most n elements
+
+
+"""
