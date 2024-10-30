@@ -13,7 +13,7 @@ class Solution:
             if start[left] >= end[right]:
                 used -= 1
                 right += 1
-            used += 1 
+            used += 1
             left += 1
 
         return used
