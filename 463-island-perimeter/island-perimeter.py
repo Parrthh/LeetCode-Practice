@@ -1,31 +1,58 @@
 class Solution:
     def islandPerimeter(self, grid: List[List[int]]) -> int:
-        # Counts the island that we have visited, so we don't visit twice
+        # Time Complexity: O(M * N), where M is the number of rows and N is the number of columns.
+        # Each cell is visited once, and each cell's neighbors are checked in four directions.
+
+        # Space Complexity: O(M * N) in the worst case for the recursion stack if the island covers the entire grid.
+        # Additionally, O(M * N) space is used for the `visited` set to track processed cells.
+
+        # Set to store the coordinates of cells that have already been visited.
+        # This prevents recounting cells and helps manage cases with multiple connections between cells.
         visited = set()
-        # nested helper function that performs dfs on each cell
-        # Goal is to calculate the permimeter contributed by a specific cell 
-        # As well as its surrounding cells
-        def dfs_method(i,j):
-            # Condition checks if cell (i,j) is out of bounds of the grid
-            # i.e. i or j are out of the row or column limits
-            # If either condition is met, it means the part of the cell boundary contributes to the perimeter
-            # Thus function return 1 to add to the perimeter count
+
+        # Define a helper function to perform DFS and calculate the perimeter of a specific cell (i, j).
+        def dfs_method(i, j):
+            # Check if the cell (i, j) is out of the grid's boundaries.
+            # If it's out of bounds (beyond the edges of the grid), it contributes to the perimeter.
+            # Additionally, if the cell is water (grid[i][j] == 0), it also contributes to the perimeter.
             if i >= len(grid) or j >= len(grid[0]) or i < 0 or j < 0 or grid[i][j] == 0:
-                return 1
-            # To check if the cell (i,j) is already in the visited set if yes return 0
-            if (i,j) in visited:
+                return 1  # Each out-of-bound edge or water cell adjacent to land contributes 1 to the perimeter.
+            
+            # If the cell has been visited before, it should not contribute again to the perimeter calculation.
+            # Returning 0 means it does not add to the perimeter since it’s already accounted for.
+            if (i, j) in visited:
                 return 0
-            # Adds the current cell (i,j) to the visits set to mark it as processed
-            visited.add((i,j))
-            # Recursive Perimeter calculation
-            perimeter = dfs_method(i, j+1) # Right side
-            perimeter += dfs_method(i+1, j) # Down 
-            perimeter += dfs_method(i, j-1) # Left
-            perimeter += dfs_method(i-1,j) # Up
-            # Returns the total
+            
+            # Mark the cell as visited by adding its coordinates to the `visited` set.
+            # This prevents revisiting and recounting during recursion.
+            visited.add((i, j))
+
+            # Initialize a perimeter count specific to this cell.
+            perimeter = 0
+
+            # Explore each of the four directions around the current cell to calculate perimeter contributions:
+            # - Right: Move horizontally to the cell on the right (i, j + 1).
+            # - Down: Move vertically to the cell below (i + 1, j).
+            # - Left: Move horizontally to the cell on the left (i, j - 1).
+            # - Up: Move vertically to the cell above (i - 1, j).
+            # Each direction call contributes to the perimeter based on its result (1 if it's a boundary/water).
+            perimeter += dfs_method(i, j + 1)  # Right
+            perimeter += dfs_method(i + 1, j)  # Down
+            perimeter += dfs_method(i, j - 1)  # Left
+            perimeter += dfs_method(i - 1, j)  # Up
+
+            # Return the total perimeter for the current cell, including contributions from all directions.
             return perimeter
-        # The nested loop here iterates through each cell in the grid to find the starting point of island
+
+        # Traverse each cell in the grid using nested loops to find the starting point of the island.
+        # Once the first land cell (1) is found, initiate DFS to calculate the perimeter of the island.
         for i in range(len(grid)):
             for j in range(len(grid[0])):
-                if grid[i][j]:
-                    return dfs_method(i,j)
+                # If a land cell (1) is found, it marks the start of the island.
+                if grid[i][j] == 1:
+                    # Start the DFS function from this land cell to calculate the total perimeter of the island.
+                    # The function returns immediately because we assume the grid has only one island.
+                    return dfs_method(i, j)
+
+        # If no land cell is found, this means the grid has no islands, so we return 0 as there is no perimeter.
+        return 0
