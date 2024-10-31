@@ -1,25 +1,36 @@
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
-        # Initialize row with 1 for n time (n is our column)
-        row = [1] * n
-        # Looping through m-1 rows
-        for i in range(m-1):
-            # Initializing new row with one, but it will be used to calculate paths
+        # STEP - 1: Initialize a row to represent the bottom row of the grid.
+        # Since we can only move right, each cell in the last row has 1 path to the target.
+        row = [1] * n  # This represents the number of paths from each cell in the bottom row.
+        
+        # STEP - 2: Loop from the second-to-last row up to the top row (m - 1 iterations)
+        # We are building the number of paths from each cell in the current row based on the row below.
+        for i in range(m - 1):
+            # Initialize a new row that will hold the number of paths from each cell in the current row.
+            # We start each row with all 1s, as the rightmost column has only one path to the target.
             new_row = [1] * n
-            # Looping through n-2 rows
-            for j in range(n-2, -1, -1):
-                # Calculating path for m -1 row or n - 2 column
-                new_row[j] = new_row[j+1] + row[j]
-            # row would then be used for another iteration with updated values
+            
+            # STEP - 3: Calculate paths for each cell in the current row from right to left.
+            # We start from the second-to-last column and move leftward.
+            for j in range(n - 2, -1, -1):
+                # The number of paths from cell (i, j) is the sum of:
+                # - paths from the cell to the right (new_row[j + 1])
+                # - paths from the cell below (row[j])
+                new_row[j] = new_row[j + 1] + row[j]
+            
+            # Update the row to be the new row for the next iteration,
+            # representing paths from this row.
             row = new_row
-        # Starting point of our robot
+        
+        # STEP - 4: Return the result from the top-left corner (starting point of the robot).
         return row[0]
 
-        # TIME COMPLEXITY:
-        # 1. Outer loop: m - 1 i.e m
-        # 2. Inner loop: n - 2 i.e: n
-        # Therefore, O(m x n)
+# TIME COMPLEXITY:
+# - Outer loop runs (m - 1) times, i.e., O(m).
+# - Inner loop runs (n - 1) times in each iteration, i.e., O(n).
+# - Thus, the overall time complexity is O(m * n).
 
-        # SPACE COMPLEXITY:
-        # 1. Initializing rows and new_rows of n elements: O(n), as well as i variable 
-        # Therefore, Space Complexity is O(n)
+# SPACE COMPLEXITY:
+# - We use only two lists of length n: 'row' and 'new_row', both requiring O(n) space.
+# - Therefore, the overall space complexity is O(n).
