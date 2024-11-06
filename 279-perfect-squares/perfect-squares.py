@@ -33,11 +33,4 @@ resulting in roughly sqrt(n) operations per i.
 SPACE COMPLEXITY: O(N)
 1. The space complexity is O(n) for the dp array used to store the minimum number of squares required
 for each value up to n
-
-
-SPACE COMPLEXITY:
-
-
-
-
 """
