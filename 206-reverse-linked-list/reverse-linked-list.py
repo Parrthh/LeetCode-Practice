@@ -18,7 +18,7 @@ class Solution:
         while curr != None:
             # Here we are storing the next node, which will be 2 in our case
             temp = curr.next
-            # Here, we are chaning our pointer of curr node which is at 2, to the prev node which is None
+            # Here, we are changing our pointer of curr node which is at 2, to the prev node which is None
             # That is how we will be reversing the linked list througout
             curr.next = prev
             # Now, we bring our prev pointer to the curr pointer
@@ -27,4 +27,11 @@ class Solution:
             curr = temp
         return prev
 
+"""
+TIME COMPLEXITY: O(n)
+1. Here, n is the number of nodes in the linked list, as each node is processed once
+
+SPACE COMPLEXITY: O(1)
+1. As the algorithm uses a constant amount of additional space
+"""
       
