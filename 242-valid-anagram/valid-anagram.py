@@ -1,6 +1,9 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
         dict_s, dict_t = {}, {}
+        if len(s) != len(t):
+            return False
+            
         for i in s:
             if dict_s.get(i, None) == None:
                 dict_s[i] = 1
@@ -12,7 +15,8 @@ class Solution:
                 dict_t[i] = 1
             else:
                 dict_t[i] += 1
-            
+        
+        
 
         return True if dict_s == dict_t else False
 
