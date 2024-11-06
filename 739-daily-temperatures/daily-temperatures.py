@@ -1,26 +1,31 @@
+from typing import List
+
 class Solution:
     def dailyTemperatures(self, temperatures: List[int]) -> List[int]:
-        # Stores the number of days 
-        n = len(temperatures)
-        # Creates an answer array of the same lenght as temperatures
-        # Because if there is no warmers day the answer remains 0
-        answer = [0] * n
-        # Monotonic stack
-        # The stack here stores the indices keeping track of the indices of days with dec temp
-        stack = []
+        # Step 1: Initialize necessary variables
+        n = len(temperatures)  # Get the length of the temperatures list
+        answer = [0] * n  # Initialize the answer list with 0s for all days
+        stack = []  # Initialize a stack to keep track of indices of decreasing temperatures
 
-        # The for loop iterates through the whole list of temperature
-        # It keeps track of the current day and its temperature
+        # Step 2: Iterate over each day and its temperature in the temperatures list
         for current_day, current_temperature in enumerate(temperatures):
-            # The while loop here checks for the current day of the temperature 
-            # and if it is warmer than the day represented by the current top of the stack
+            # Check if there's a day in the stack with a lower temperature than the current day
             while stack and temperatures[stack[-1]] < current_temperature:
-                # Pop the previous day to check
+                # Pop the last day from the stack to calculate the waiting days
                 previous_day = stack.pop()
-                # Calculate the index
+                # Calculate the difference in days between the current day and previous day
                 answer[previous_day] = current_day - previous_day
-            # Appending the index
+            
+            # Step 3: Push the current day index onto the stack
             stack.append(current_day)
         
-        return answer  
+        # Step 4: Return the filled answer array
+        return answer
+"""
+TIME COMPLEXITY: O(N)
+Each element is pushed and popped from the stack once, giving an O(n) time complexity
 
+SPACE COMPLEXITY: O(N)
+The answer list and the stack grow up to size of n, so the space complexity is O(n)
+
+"""
