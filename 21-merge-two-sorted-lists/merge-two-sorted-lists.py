@@ -34,4 +34,15 @@ class Solution:
         return dummy.next
 
 
+"""
+TIME COMPLEXITY: O(m + n)
+1. The while loop iterates through both the lists until one is exhausted
+2. In each iteration, it compares the current node values from list1 and list2 and advances one of the pointers
+3. Each element of both the linked lists is processed exactly once
+4. If n is the number of nodes in list1 and m is the number of nodes in list2,
+then the loop will run at most O(n + m) times
+5. Therefore, the overall time complexity is O(n + m), where n and m are the lenghts of lists1 and lists2
 
+SPACE COMPLEXITY: O(1)
+1. Since only a constant amount of extra space is used, the space complexity is O(1)
+"""
