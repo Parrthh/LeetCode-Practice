@@ -14,7 +14,7 @@ class Solution:
         for _ in range(n+1):
             if first_pointer is None:
                 return None
-            first_pointer = first_pointer. next
+            first_pointer = first_pointer.next
         
         # Move both the first and second pointers until first reaches the end
         while first_pointer:
@@ -27,3 +27,15 @@ class Solution:
        
         # Removing the head of the modified list (which might change)
         
+"""
+TIME COMPLEXITY:
+1. Moving first_pointer n + 1 steps takes O(n + 1) = O(n) time
+2. After creating the gap, both pointer are moved together until first_pointer reaches the end.
+This takes O(L - n), L -> length of the first
+3. Therefore, the overall time complexity for this is O(L), which is same as O(n), if n is close to L
+
+SPACE COMPLEXITY:
+1. The solution used few additional pointers which occupy constant space.
+2. Therefore, the space complexity is O(1), as only a constant amount of extra space is used
+
+"""
