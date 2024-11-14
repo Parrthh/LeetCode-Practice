@@ -27,4 +27,13 @@ class Solution:
 
         return res
 
-        
+"""
+TIME COMPLEXITY: O(n ^ 2)
+1. For each character, we expand outwards to check both odd and even-length
+palindromes which take O(n) time
+2. We do this for each of n characters in the string
+
+SPACE COMPLEXITY: O(1)
+1. We use few variables and no extra data structure
+
+"""
