@@ -1,20 +1,35 @@
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
-        # Step 1: Sort intervals by start time
-        intervals.sort(key=lambda x: x[0])
+        # If there are no intervals, return an empty list
+        if not intervals:
+            return []
+        
+        # Sort the intervals based on the start time
+        intervals.sort(key = lambda x:x[0])
 
-        # Step 2: Initialize merged list to hold merged intervals
-        merged = []
+        # Initialize the result list with the first interval
+        result = [intervals[0]]
 
-        # Step 3: Iterate through the sorted intervals
-        for interval in intervals:
-            # If merged is empty or there is no overlap, add the interval
-            if not merged or merged[-1][1] < interval[0]:
-                merged.append(interval)
+        # Iterate through the intervals to merge overlapping ones
+        for i in range(1, len(intervals)):
+            # Get the last interval in the result list
+            last_interval = result[-1]
+            current_interval = intervals[i]
+            # If the current interval overlaps with the last interval
+            if current_interval[0] <= last_interval[1]:
+                # Merge them by updating the end of the last interval
+                last_interval[1] = max(last_interval[1], current_interval[1])
             else:
-                # There is an overlap, so merge with the last interval in merged
-                merged[-1][1] = max(merged[-1][1], interval[1])
+                # Otherwise, add the current interval to the result list
+                result.append(current_interval)
+        return result
+                
 
-        # Step 4: Return the merged intervals
-        return merged
+"""
+TIME COMPLEXITY : O(n log n)
+
+
+SPACE COMPLEXITY: O(n)
+
+"""
         
