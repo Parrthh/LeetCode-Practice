@@ -5,7 +5,7 @@ class Solution:
         res = []  # This will hold the resulting triplets
 
         # Step 2: Iterate through the array, treating each element as the potential first element of a triplet
-        for i in range(len(nums)-2):
+        for i in range(len(nums)):
             # Skip duplicate elements for `i` to avoid duplicate triplets in `res`
             if i > 0 and nums[i] == nums[i - 1]:
                 continue
