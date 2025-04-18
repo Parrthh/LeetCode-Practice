@@ -5,7 +5,7 @@ class Solution:
         res = []  # This will hold the resulting triplets
 
         # Step 2: Iterate through the array, treating each element as the potential first element of a triplet
-        for i in range(len(nums) - 2):
+        for i in range(len(nums)-2):
             # Skip duplicate elements for `i` to avoid duplicate triplets in `res`
             if i > 0 and nums[i] == nums[i - 1]:
                 continue
@@ -43,3 +43,14 @@ class Solution:
 
         # Step 6: Return the list of unique triplets
         return res
+
+"""
+TIME COMPLEXITY:
+1. combining the sorting step and the main loop, the time complexity is: O(nlogn) + O(n^2) = O(n^2)
+2. Since O(n^2) dominates O(nlogn), the overall time complexity is O(n^2)
+
+SPACE COMPLEXITY:O(N^2)
+1. The space complexity is O(n^2) in the worst case due to the storage of triplets in the result list
+
+
+"""
